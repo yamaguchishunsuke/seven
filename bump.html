@@ -21,23 +21,26 @@
     var width = 800,
         height = 600;
   
-    // レンダラーを作成
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
-  
-    // シーンを作成
-    var scene = new THREE.Scene();
-  
-    // カメラを作成
-  var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-     // カメラの初期座標を設定
-        camera.position.set(0, 0, 1000);
+    // サイズを指定
+const width = 960;
+const height = 540;
 
-    
-     // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera,document.body);
+// レンダラーを作成
+const canvasElement = document.querySelector('#myCanvas')
+const renderer = new THREE.WebGLRenderer({
+  canvas: canvasElement,
+});
+renderer.setSize(width, height);
 
+// シーンを作成
+const scene = new THREE.Scene();
+
+// カメラを作成
+const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+camera.position.set(0, 0, 1000);
+
+// カメラコントローラーを作成
+const controls = new THREE.OrbitControls(camera, canvasElement);
    // テクスチャー読み込み
    var textureLoader = new THREE.TextureLoader();  
   var texture = textureLoader.load("wood1.jpg");
@@ -87,5 +90,7 @@
 }
   window.addEventListener('DOMContentLoaded', init);
 </script>
+<body>
+      <canvas id="myCanvas"></canvas>
 </body>
 </html>
